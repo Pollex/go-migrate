@@ -15,11 +15,8 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o ./bin/go-
 # Scratch docker image containing nothing but the application
 #
 FROM alpine AS production
-# Start at //opt/app
+# Start at /opt/app
 WORKDIR /opt/app
 # Copy our static executable.
 COPY --from=builder /opt/app/bin/go-migrate /opt/app/go-migrate
-# Expose ports
-EXPOSE 3000
-# Run the hello binary.
 CMD ["/opt/app/go-migrate"]
