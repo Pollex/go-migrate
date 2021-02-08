@@ -1,0 +1,27 @@
+name: Go
+
+on:
+  push:
+    branches: [ develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.15
+
+    - name: Test
+      run: go test -v ./...
+      
+    - name: Kaniko build
+      uses: aevea/action-kaniko@master
+      with:
+        registry: cr.pollex.nl
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+        image: cr.pollex.nl/timvosch/go-migrate:next
