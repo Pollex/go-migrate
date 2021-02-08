@@ -24,4 +24,4 @@ jobs:
         registry: cr.pollex.nl
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
-        image: cr.pollex.nl/timvosch/go-migrate:next
+        image: cr.pollex.nl/pollex/go-migrate:next
